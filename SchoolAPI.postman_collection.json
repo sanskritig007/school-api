@@ -1,0 +1,141 @@
+{
+  "info": {
+    "name": "School Management API",
+    "description": "API for adding schools and listing them sorted by proximity",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Add School (Success)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Green Valley High\",\n  \"address\": \"123 Education Lane, City\",\n  \"latitude\": 28.7041,\n  \"longitude\": 77.1025\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/addSchool",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "addSchool"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Add School (Validation Error - Missing Name)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"address\": \"123 Education Lane, City\",\n  \"latitude\": 28.7041,\n  \"longitude\": 77.1025\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/addSchool",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "addSchool"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Add School (Validation Error - Invalid Latitude)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test School\",\n  \"address\": \"Address\",\n  \"latitude\": 100.5,\n  \"longitude\": 77.1025\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/addSchool",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "addSchool"
+          ]
+        }
+      }
+    },
+    {
+      "name": "List Schools (Success)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/listSchools?latitude=28.7&longitude=77.1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "listSchools"
+          ],
+          "query": [
+            {
+              "key": "latitude",
+              "value": "28.7"
+            },
+            {
+              "key": "longitude",
+              "value": "77.1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "List Schools (Validation Error - Missing coords)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/listSchools",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "listSchools"
+          ]
+        }
+      }
+    }
+  ]
+}

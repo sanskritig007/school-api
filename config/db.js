@@ -1,18 +1,23 @@
-const mysql = require("mysql2");
+const mysql = require("mysql2/promise");
 
-const db = mysql.createConnection({
+const pool = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: process.env.DB_PASSWORD,
-  database: "schooldb"
+  password: "Root@1234",
+  database: "schooldb",
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-db.connect((err) => {
-  if (err) {
-    console.log("DB connection failed", err);
-  } else {
-    console.log("Connected to MySQL");
-  }
-});
+// Test the connection
+pool.getConnection()
+  .then((connection) => {
+    console.log("Connected to MySQL database pool successfully");
+    connection.release();
+  })
+  .catch((err) => {
+    console.error("Database connection failed:", err.message);
+  });
 
-module.exports = db;
+module.exports = pool;
